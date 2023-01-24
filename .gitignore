@@ -409,6 +409,8 @@ FodyWeavers.xsd
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
+.idea/**/aws.xml
+.idea/**/misc.xml
 
 # AWS User-specific
 .idea/**/aws.xml
