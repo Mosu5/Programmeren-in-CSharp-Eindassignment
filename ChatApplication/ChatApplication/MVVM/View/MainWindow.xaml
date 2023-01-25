@@ -161,13 +161,13 @@
                             Grid.Column="1"
                             Margin="0,0,16,0">
                     
-                    <Image Source="./Icons/plus.png"
+                    <Image Source="/Icons/plus.png"
                            Width="20"
                            Height="20"
                            RenderOptions.BitmapScalingMode="Fant"
                            Margin="5,5,5,0"/>
                     
-                    <Image Source="./Icons/send.png"
+                    <Image Source="/Icons/send.png"
                            Width="20"
                            Height="20"
                            RenderOptions.BitmapScalingMode="Fant"
