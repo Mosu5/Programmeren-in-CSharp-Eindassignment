@@ -18,9 +18,9 @@ namespace ChatApplication
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class TemporaryChat : Window
+    public partial class MainWindow : Window
     {
-        public TemporaryChat()
+        public MainWindow()
         {
             InitializeComponent();
         }
