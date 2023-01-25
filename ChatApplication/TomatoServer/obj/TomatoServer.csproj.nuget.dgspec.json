@@ -1,0 +1,118 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\maxtv\\Documents\\_projects\\Programmeren-in-CSharp-Eindassignment\\ChatApplication\\TomatoServer\\TomatoServer.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\maxtv\\Documents\\_projects\\Programmeren-in-CSharp-Eindassignment\\ChatApplication\\TomatoLib\\TomatoLib.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\maxtv\\Documents\\_projects\\Programmeren-in-CSharp-Eindassignment\\ChatApplication\\TomatoLib\\TomatoLib.csproj",
+        "projectName": "TomatoLib",
+        "projectPath": "C:\\Users\\maxtv\\Documents\\_projects\\Programmeren-in-CSharp-Eindassignment\\ChatApplication\\TomatoLib\\TomatoLib.csproj",
+        "packagesPath": "C:\\Users\\maxtv\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\maxtv\\Documents\\_projects\\Programmeren-in-CSharp-Eindassignment\\ChatApplication\\TomatoLib\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\maxtv\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\maxtv\\Documents\\_projects\\Programmeren-in-CSharp-Eindassignment\\ChatApplication\\TomatoServer\\TomatoServer.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\maxtv\\Documents\\_projects\\Programmeren-in-CSharp-Eindassignment\\ChatApplication\\TomatoServer\\TomatoServer.csproj",
+        "projectName": "TomatoServer",
+        "projectPath": "C:\\Users\\maxtv\\Documents\\_projects\\Programmeren-in-CSharp-Eindassignment\\ChatApplication\\TomatoServer\\TomatoServer.csproj",
+        "packagesPath": "C:\\Users\\maxtv\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\maxtv\\Documents\\_projects\\Programmeren-in-CSharp-Eindassignment\\ChatApplication\\TomatoServer\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\maxtv\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\maxtv\\Documents\\_projects\\Programmeren-in-CSharp-Eindassignment\\ChatApplication\\TomatoLib\\TomatoLib.csproj": {
+                "projectPath": "C:\\Users\\maxtv\\Documents\\_projects\\Programmeren-in-CSharp-Eindassignment\\ChatApplication\\TomatoLib\\TomatoLib.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

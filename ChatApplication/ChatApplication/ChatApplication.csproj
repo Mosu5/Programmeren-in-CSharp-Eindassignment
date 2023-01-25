@@ -11,4 +11,12 @@
       <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Include="TomatoServer\TomatoServer.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="TomatoServer\bin\Debug\net5.0" />
+    </ItemGroup>
+
 </Project>
