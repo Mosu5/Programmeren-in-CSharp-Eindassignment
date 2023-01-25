@@ -7,4 +7,11 @@
         <UseWPF>true</UseWPF>
     </PropertyGroup>
 
+    <ItemGroup>
+      <None Remove="Icons\plus.png" />
+      <Resource Include="Icons\plus.png" />
+      <None Remove="Icons\send.png" />
+      <Resource Include="Icons\send.png" />
+    </ItemGroup>
+
 </Project>

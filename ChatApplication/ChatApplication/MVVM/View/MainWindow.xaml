@@ -150,7 +150,7 @@
                     <ColumnDefinition Width="90" />
                 </Grid.ColumnDefinitions>
 
-                <TextBox Grid.Row="1"
+                <TextBox 
                          Height="50"
                          Text="Message @Username"
                          Style="{StaticResource MessageBox}"
@@ -165,7 +165,7 @@
                            Width="20"
                            Height="20"
                            RenderOptions.BitmapScalingMode="Fant"
-                           Margin="5,5,5,0"/>
+                           Margin="5,5,5,0" />
                     
                     <Image Source="/Icons/send.png"
                            Width="20"
