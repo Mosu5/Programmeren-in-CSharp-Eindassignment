@@ -20,13 +20,13 @@ public class RelayCommand : ICommand
         _canExecute = canExecute;
     }
     
-    public bool CanExecute(object? parameter)
+    public bool CanExecute(object parameter)
     {
-        return parameter != null || _canExecute(parameter!);
+        return this._canExecute == null || this._canExecute(parameter);
     }
     
-    public void Execute(object? parameter)
+    public void Execute(object parameter)
     {
-        if (parameter != null) _execute(parameter);
+        this._execute(parameter);
     }
 }

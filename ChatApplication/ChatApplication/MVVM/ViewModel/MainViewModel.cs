@@ -40,7 +40,8 @@ public class MainViewModel : ObservableObject
     {
         Messages = new ObservableCollection<MessageModel>();
         Contacts = new ObservableCollection<ContactModel>();
-
+        
+        
         SendCommand = new RelayCommand(o =>
         {
             Messages.Add(new MessageModel
@@ -97,5 +98,7 @@ public class MainViewModel : ObservableObject
                 Messages = Messages
             });
         }
+        
+        _selectedContact = Contacts[0];
     }
 }
