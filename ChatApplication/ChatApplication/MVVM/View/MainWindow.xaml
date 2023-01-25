@@ -162,18 +162,30 @@
                             HorizontalAlignment="Right"
                             Grid.Column="1"
                             Margin="0,0,16,0">
+                    
+                    <Button
+                        Background="Transparent"
+                        Width="25"
+                        Margin="5,5,5,0"
+                        Height="25"
+                        
+                        BorderBrush="Transparent">
+                        <Image Source="/Icons/plus.png"
+                               RenderOptions.BitmapScalingMode="Fant" />
+                        
+                    </Button>
 
-                    <Image Source="/Icons/plus.png"
-                           Width="20"
-                           Height="20"
-                           RenderOptions.BitmapScalingMode="Fant"
-                           Margin="5,5,5,0" />
-
-                    <Image Source="/Icons/send.png"
-                           Width="20"
-                           Height="20"
-                           RenderOptions.BitmapScalingMode="Fant"
-                           Margin="5,5,16,0" />
+                    <Button
+                        Background="Transparent"
+                        Width="25"
+                        Margin="5,5,16,0"
+                        Height="25"
+                        Command="{Binding SendCommand}"
+                        BorderBrush="Transparent">
+                        <Image Source="/Icons/send.png"
+                               RenderOptions.BitmapScalingMode="Fant" />
+                        
+                    </Button>
 
                 </StackPanel>
 
