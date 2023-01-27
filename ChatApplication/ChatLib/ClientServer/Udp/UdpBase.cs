@@ -1,9 +1,10 @@
 ﻿using System.Net.Sockets;
 using System.Text;
+using ChatServer;
 
-namespace ChatServer.Udp
+namespace ChatLib.ClientServer.Udp
 {
-    internal abstract class UdpBase
+    public abstract class UdpBase
     {
         protected UdpClient Client;
 

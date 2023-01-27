@@ -1,8 +1,8 @@
 ﻿using System.Text;
 
-namespace ChatServer.Udp
+namespace ChatLib.ClientServer.Udp
 {
-    internal class UdpUser : UdpBase
+    public class UdpUser : UdpBase
     {
         private UdpUser()
         {

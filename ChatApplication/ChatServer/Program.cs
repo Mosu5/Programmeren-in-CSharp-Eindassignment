@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics;
-using ChatServer.Udp;
+using ChatLib.ClientServer.Udp;
 
 namespace ChatServer;
 

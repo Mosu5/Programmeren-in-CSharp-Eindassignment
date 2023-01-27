@@ -1,8 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatApplication", "ChatApplication\ChatApplication.csproj", "{4DD819BE-8633-4E08-B2F0-C14972F6A71B}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatApplication", "ChatApplication\ChatApplication.csproj", "{4DD819BE-8633-4E08-B2F0-C14972F6A71B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatServer", "ChatServer\ChatServer.csproj", "{B250E10C-B352-4FFD-AD6E-E27B1BFD19C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatServer", "ChatServer\ChatServer.csproj", "{B250E10C-B352-4FFD-AD6E-E27B1BFD19C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExampleUdpClient", "ExampleUdpClient\ExampleUdpClient.csproj", "{18323886-3B4B-44BF-A1F2-E6611F3139FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatLib", "ChatLib\ChatLib.csproj", "{3E018454-7780-4598-AA1C-7004D3594D22}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +25,19 @@ Global
 		{B250E10C-B352-4FFD-AD6E-E27B1BFD19C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B250E10C-B352-4FFD-AD6E-E27B1BFD19C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B250E10C-B352-4FFD-AD6E-E27B1BFD19C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18323886-3B4B-44BF-A1F2-E6611F3139FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18323886-3B4B-44BF-A1F2-E6611F3139FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18323886-3B4B-44BF-A1F2-E6611F3139FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18323886-3B4B-44BF-A1F2-E6611F3139FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E018454-7780-4598-AA1C-7004D3594D22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E018454-7780-4598-AA1C-7004D3594D22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E018454-7780-4598-AA1C-7004D3594D22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E018454-7780-4598-AA1C-7004D3594D22}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {218B64C1-CBD4-4C69-BF39-9D21A12B0D46}
 	EndGlobalSection
 EndGlobal
