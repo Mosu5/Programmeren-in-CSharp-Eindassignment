@@ -20,7 +20,7 @@ namespace ChatServer
                 var client = new Client(_listener.AcceptTcpClient());
                 _users.Add(client);
                 
-                /* Broadcst the connection to every user on the server */
+                /* Broadcast the connection to every user on the server */
             }
         }
     }
