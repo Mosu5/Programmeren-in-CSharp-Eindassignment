@@ -13,6 +13,8 @@ public class Client
         ClientSocket = client;
         UID = Guid.NewGuid();
         
+        // TODO Read the username from the client
+        
         
         Console.WriteLine($"{DateTime.Now} - Client connected with username {Username} and UID {UID}");
     }

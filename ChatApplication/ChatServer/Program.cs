@@ -21,6 +21,19 @@ namespace ChatServer
                 _users.Add(client);
                 
                 /* Broadcast the connection to every user on the server */
+                BroadcastConnection();
+            }
+        }
+
+        static void BroadcastConnection()
+        {
+            foreach (var user in _users)
+            {
+                foreach (var usr in _users)
+                {
+                    // TODO build a message/packet passing the username and UID
+                    // TODO send the message to the user
+                }
             }
         }
     }
