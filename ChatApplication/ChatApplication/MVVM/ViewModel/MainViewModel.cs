@@ -1,116 +1,74 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Windows;
 using ChatApplication.Core;
 using ChatApplication.MVVM.Model;
 using ChatApplication.Net;
 
 namespace ChatApplication.MVVM.ViewModel;
 
-public class MainViewModel : ObservableObject
+public class MainViewModel
 {
-    public ObservableCollection<MessageModel> Messages { get; set; }
-    public ObservableCollection<ContactModel> Contacts { get; set; }
-
     /* Commands */
     public RelayCommand ConnectToServerCommand { get; set; }
-    public RelayCommand SendCommand { get; set; }
+    public RelayCommand SendMessageCommand { get; set; }
 
-    private ContactModel _selectedContact;
-
-    public ContactModel SelectedContact
-    {
-        get => _selectedContact;
-        set
-        {
-            _selectedContact = value;
-            OnPropertyChanged();
-        }
-    }
-
-    private string _message;
-
-    public string Message
-    {
-        get => _message;
-        set
-        {
-            _message = value;
-            OnPropertyChanged();
-        }
-    }
-
+    /* Properties */
+    public ObservableCollection<UserModel> Users { get; set; }
+    public ObservableCollection<string> Messages { get; set; }
     public string Username { get; set; }
-
+    public string Message { get; set; }
 
     private Server _server;
 
     public MainViewModel()
     {
-        Messages = new ObservableCollection<MessageModel>();
-        Contacts = new ObservableCollection<ContactModel>();
+        Users = new ObservableCollection<UserModel>();
+        Messages = new ObservableCollection<string>();
+
+        _server = new Server();
+        _server.ConnectedEvent += UserConnected;
+        _server.MessageReceivedEvent += MessageReceived;
+        _server.UserDisconnectedEvent += RemoveUser;
 
         ConnectToServerCommand =
             new RelayCommand(
                 o => _server.ConnectToServer(Username),
                 o => !string.IsNullOrEmpty(Username)
-                );
+            );
 
-        SendCommand = new RelayCommand(o =>
+        SendMessageCommand =
+            new RelayCommand(
+                o => _server.SendMessage(Message),
+                o => !string.IsNullOrEmpty(Message)
+            );
+    }
+
+    private void RemoveUser()
+    {
+        var uid = _server.PacketReader.ReadMessage();
+        var user = Users.FirstOrDefault(x => x.UID == uid);
+        Application.Current.Dispatcher.Invoke(() => Users.Remove(user));
+    }
+
+    private void MessageReceived()
+    {
+        var msg = _server.PacketReader.ReadMessage();
+        Application.Current.Dispatcher.Invoke(() => Messages.Add(msg));
+    }
+
+    private void UserConnected()
+    {
+        var user = new UserModel
         {
-            Messages.Add(new MessageModel
-            {
-                Message = Message,
-                FirstMessage = false
-            });
+            Username = _server.PacketReader.ReadMessage(),
+            UID = _server.PacketReader.ReadMessage(),
+        };
 
-            Message = "";
-        });
-
-        Messages.Add(new MessageModel
+        if (Users.All(x => x.UID != user.UID))
         {
-            Username = "Allison",
-            UsernameColor = "#409aff",
-            ImageSource = "https://i.imgur.com/yMWvLXd.png",
-            Message = "Hello, how are you?",
-            Time = DateTime.Now,
-            IsNativeOrigin = false,
-            FirstMessage = true
-        });
-
-        for (int i = 0; i < 4; i++)
-        {
-            Messages.Add(new MessageModel
-            {
-                Username = "Bunny",
-                UsernameColor = "#409aff",
-                ImageSource = "https://i.imgur.com/yMWvLXd.png",
-                Message = "Test",
-                Time = DateTime.Now,
-                IsNativeOrigin = true,
-            });
-
-
-            Messages.Add(new MessageModel
-            {
-                Username = "Allison",
-                UsernameColor = "#409aff",
-                ImageSource = "https://i.imgur.com/yMWvLXd.png",
-                Message = "Last",
-                Time = DateTime.Now,
-                IsNativeOrigin = true,
-            });
+            Application.Current.Dispatcher.Invoke(() => Users.Add(user));
         }
-
-        for (int j = 0; j < 5; j++)
-        {
-            Contacts.Add(new ContactModel
-            {
-                Username = $"Allison {j}",
-                ImageSource = "https://i.imgur.com/yMWvLXd.png",
-                Messages = Messages
-            });
-        }
-
-        _selectedContact = Contacts[0];
     }
 }

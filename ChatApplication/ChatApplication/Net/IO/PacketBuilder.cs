@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text;
 
-namespace ChatApplication.Net;
+namespace ChatApplication.Net.IO;
 
 public class PacketBuilder
 {
