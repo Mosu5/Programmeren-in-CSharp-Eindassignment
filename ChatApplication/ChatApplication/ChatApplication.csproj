@@ -8,6 +8,13 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <None Remove="Icons\plus.png" />
+      <Resource Include="Icons\plus.png" />
+      <None Remove="Icons\send.png" />
+      <Resource Include="Icons\send.png" />
+    </ItemGroup>
+
+    <ItemGroup>
       <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
     </ItemGroup>
 
