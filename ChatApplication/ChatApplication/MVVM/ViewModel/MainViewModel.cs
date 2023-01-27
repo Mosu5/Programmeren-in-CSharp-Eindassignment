@@ -8,7 +8,7 @@ using ChatApplication.Net;
 
 namespace ChatApplication.MVVM.ViewModel;
 
-public class MainViewModel
+public class MainViewModel : ObservableObject
 {
     /* Commands */
     public RelayCommand ConnectToServerCommand { get; set; }
@@ -18,7 +18,17 @@ public class MainViewModel
     public ObservableCollection<UserModel> Users { get; set; }
     public ObservableCollection<string> Messages { get; set; }
     public string Username { get; set; }
-    public string Message { get; set; }
+
+    private string _message;
+    public string Message
+    {
+        get => _message;
+        set
+        {
+            _message = value;
+            OnPropertyChanged();
+        }
+    }
 
     private Server _server;
 
@@ -40,7 +50,12 @@ public class MainViewModel
 
         SendMessageCommand =
             new RelayCommand(
-                o => _server.SendMessage(Message),
+                o =>
+                {
+                    _server.SendMessage(Message);
+                    Message = String.Empty;
+
+                },
                 o => !string.IsNullOrEmpty(Message)
             );
     }
