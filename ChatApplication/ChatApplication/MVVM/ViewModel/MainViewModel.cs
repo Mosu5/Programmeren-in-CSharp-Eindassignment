@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using ChatApplication.Core;
 using ChatApplication.MVVM.Model;
+using ChatApplication.Net;
 
 namespace ChatApplication.MVVM.ViewModel;
 
@@ -9,11 +10,13 @@ public class MainViewModel : ObservableObject
 {
     public ObservableCollection<MessageModel> Messages { get; set; }
     public ObservableCollection<ContactModel> Contacts { get; set; }
-    
+
     /* Commands */
+    public RelayCommand ConnectToServerCommand { get; set; }
     public RelayCommand SendCommand { get; set; }
 
     private ContactModel _selectedContact;
+
     public ContactModel SelectedContact
     {
         get => _selectedContact;
@@ -23,8 +26,9 @@ public class MainViewModel : ObservableObject
             OnPropertyChanged();
         }
     }
+
     private string _message;
-    
+
     public string Message
     {
         get => _message;
@@ -34,14 +38,23 @@ public class MainViewModel : ObservableObject
             OnPropertyChanged();
         }
     }
-    
+
+    public string Username { get; set; }
+
+
+    private Server _server;
 
     public MainViewModel()
     {
         Messages = new ObservableCollection<MessageModel>();
         Contacts = new ObservableCollection<ContactModel>();
-        
-        
+
+        ConnectToServerCommand =
+            new RelayCommand(
+                o => _server.ConnectToServer(Username),
+                o => !string.IsNullOrEmpty(Username)
+                );
+
         SendCommand = new RelayCommand(o =>
         {
             Messages.Add(new MessageModel
@@ -49,9 +62,8 @@ public class MainViewModel : ObservableObject
                 Message = Message,
                 FirstMessage = false
             });
-            
+
             Message = "";
-            
         });
 
         Messages.Add(new MessageModel
@@ -98,7 +110,7 @@ public class MainViewModel : ObservableObject
                 Messages = Messages
             });
         }
-        
+
         _selectedContact = Contacts[0];
     }
 }
