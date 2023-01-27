@@ -8,7 +8,7 @@ internal class Program
     private static void Main(string[] args)
     {
         //create a new server
-        var server = new UdpListener();
+        IServer server = new Server();
 
         //start listening for messages and copy the messages back to the client
         Task.Factory.StartNew(async () => {
