@@ -1,7 +1,6 @@
 using System;
 using System.Net.Sockets;
 using System.Threading.Tasks;
-using System.Windows;
 using ChatApplication.Net.IO;
 
 namespace ChatApplication.Net;

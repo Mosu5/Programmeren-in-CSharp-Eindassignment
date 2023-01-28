@@ -1,5 +1,5 @@
 ﻿using System.Net.Sockets;
-using ChatServer.NET;
+using ChatServer.NET.IO;
 
 namespace ChatServer;
 

@@ -1,7 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.Linq;
-
-namespace ChatApplication.MVVM.Model;
+﻿namespace ChatApplication.MVVM.Model;
 
 public class UserModel
 {

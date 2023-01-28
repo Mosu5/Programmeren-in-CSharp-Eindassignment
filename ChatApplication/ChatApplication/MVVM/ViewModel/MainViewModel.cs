@@ -56,7 +56,8 @@ public class MainViewModel : ObservableObject
                     }
                     catch (Exception e)
                     {
-                        MessageBox.Show("Could not connect to server. Try restarting the application.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("Could not connect to server. Try restarting the application.", "Error",
+                            MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 },
                 o => !string.IsNullOrEmpty(Username)
@@ -79,6 +80,7 @@ public class MainViewModel : ObservableObject
                             MessageBoxImage.Error
                         );
                     }
+
                     Message = String.Empty;
                 },
                 o => !string.IsNullOrEmpty(Message)
@@ -93,29 +95,33 @@ public class MainViewModel : ObservableObject
                 },
                 o => Messages.Count > 0
             );
+
         LoadChatlogCommand = new RelayCommand(
-            // displays a messagebox to warn the user, if they cancel do nothing, if they confirm load the chatlog
-            async o =>
-            {
-                var result = WarnUserChatlogOverwrite();
-                if (result == MessageBoxResult.Yes)
-                {
-                    Disconnect();
-                    var fileHandler = new FileHandler();
-                    var chatlog = await fileHandler.ReadFromFileAsync();
-                    if (chatlog.Count == 0)
-                    {
-                        return;
-                    }
-                    Messages.Clear();
-                    foreach (var line in chatlog)
-                    {
-                        Application.Current.Dispatcher.Invoke(() => Messages.Add(line));
-                    }
-                }
-            },
+            LoadChat,
             o => true
         );
+    }
+
+    // displays a messagebox to warn the user, if they cancel do nothing, if they confirm load the chatlog
+    private async void LoadChat(object o)
+    {
+        var result = WarnUserChatlogOverwrite();
+        if (result == MessageBoxResult.Yes)
+        {
+            Disconnect();
+            var fileHandler = new FileHandler();
+            var chatlog = await fileHandler.ReadFromFileAsync();
+            if (chatlog.Count == 0)
+            {
+                return;
+            }
+
+            Messages.Clear();
+            foreach (var line in chatlog)
+            {
+                Application.Current.Dispatcher.Invoke(() => Messages.Add(line));
+            }
+        }
     }
 
     private MessageBoxResult WarnUserChatlogOverwrite()
@@ -127,7 +133,7 @@ public class MainViewModel : ObservableObject
             MessageBoxImage.Warning
         );
     }
-    
+
     private void Disconnect()
     {
         _server.Disconnect();
@@ -161,7 +167,7 @@ public class MainViewModel : ObservableObject
             Username = _server.PacketReader.ReadMessage(),
             UID = _server.PacketReader.ReadMessage(),
         };
-        
+
         if (Users.All(x => x.UID != user.UID))
         {
             Application.Current.Dispatcher.Invoke(() => Users.Add(user));
