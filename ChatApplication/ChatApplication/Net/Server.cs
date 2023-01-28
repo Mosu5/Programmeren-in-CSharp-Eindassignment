@@ -91,4 +91,13 @@ public class Server
         messagePacket.WriteMessage(message);
         _client.Client.Send(messagePacket.GetPacketBytes());
     }
+
+    public void Disconnect()
+    {
+        // If the client is connected, disconnect it
+        if (_client.Connected)
+        {
+            _client.Close();
+        }
+    }
 }
