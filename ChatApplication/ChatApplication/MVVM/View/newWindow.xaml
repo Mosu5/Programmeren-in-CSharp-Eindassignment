@@ -14,25 +14,24 @@
     
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200" />
             <ColumnDefinition />
+            <ColumnDefinition Width="200" />
         </Grid.ColumnDefinitions>
 
-        <Grid Width="200">
+        <!-- User List & miscellaneous buttons-->
+        <Grid 
+            Grid.Column="1"
+            Width="200">
             <Grid.RowDefinitions>
-                <RowDefinition Height="25"></RowDefinition>
-                <RowDefinition Height="25"></RowDefinition>
                 <RowDefinition></RowDefinition>
+                <RowDefinition Height="25"></RowDefinition>
+                <RowDefinition Height="25"></RowDefinition>
+                <RowDefinition Height="70"></RowDefinition>
             </Grid.RowDefinitions>
             
-            <TextBox Grid.Row="0"
-                     Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"/>
-            <Button Grid.Row="1"
-                    Content="Connect" 
-                    Command = "{Binding ConnectToServerCommand}"/>
-            
+            <!-- Userlist -->
             <ListView
-                Grid.Row="2"
+                Grid.Row="0"
                 ItemsSource="{Binding Users}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -40,21 +39,47 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            
+            <!-- Local user settings -->
+            <TextBox Grid.Row="1"
+                     Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button Grid.Row="2"
+                    Content="Connect" 
+                    Command = "{Binding ConnectToServerCommand}"/>
+            
+            
+            <!-- Chatlog IO buttons -->
+            <StackPanel Orientation="Horizontal"
+                        Margin="0, 10, 0, 10"
+                        Grid.Row="3">
+                
+                <Button Width="85"
+                        Margin="10, 0,10 ,0"
+                        Content="Save chat-log"
+                        Command="{Binding SaveChatlogCommand}"/>
+                <Button Width="85"
+                        Content="Load chat-log"
+                        Command="{Binding LoadChatlogCommand}"/>
+            </StackPanel>
+            
         </Grid>
 
-        <Grid Grid.Column="1">
-
+        <!-- Chat Window -->
+        <Grid Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50" />
                 <RowDefinition />
                 <RowDefinition Height="70" />
             </Grid.RowDefinitions>
 
+            <!-- Chat view -->
             <ListView  
                       Grid.RowSpan="2"
                       ItemsSource="{Binding Messages}"/>
 
-            <Grid Grid.Row="2">
+            <!-- Message box -->
+            <Grid Grid.Row="2"
+                  Margin="0,0,5,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition Width="90" />
@@ -66,27 +91,12 @@
                     Style="{StaticResource MessageBox}"
                     Grid.ColumnSpan="2" />
 
-                <StackPanel Orientation="Horizontal"
-                            HorizontalAlignment="Right"
-                            Grid.Column="1"
-                            Margin="0,0,16,0">
-
-                    <Button
+                <Button
+                        Grid.Column="1"
+                        HorizontalAlignment="Right"
                         Background="Transparent"
                         Width="25"
-                        Margin="5,5,5,0"
-                        Height="25"
-
-                        BorderBrush="Transparent">
-                        <Image Source="/Icons/plus.png"
-                               RenderOptions.BitmapScalingMode="Fant" />
-
-                    </Button>
-
-                    <Button
-                        Background="Transparent"
-                        Width="25"
-                        Margin="5,5,16,0"
+                        Margin="0,0,16,0"
                         Height="25"
                         Command="{Binding SendMessageCommand}"
                         BorderBrush="Transparent">
@@ -94,9 +104,6 @@
                                RenderOptions.BitmapScalingMode="Fant" />
 
                     </Button>
-
-                </StackPanel>
-
             </Grid>
         </Grid>
     </Grid>
