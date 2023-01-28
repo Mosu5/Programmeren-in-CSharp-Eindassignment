@@ -80,7 +80,7 @@ public class MainViewModel : ObservableObject
             Username = _server.PacketReader.ReadMessage(),
             UID = _server.PacketReader.ReadMessage(),
         };
-
+        
         if (Users.All(x => x.UID != user.UID))
         {
             Application.Current.Dispatcher.Invoke(() => Users.Add(user));

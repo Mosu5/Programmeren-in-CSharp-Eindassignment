@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Sockets;
 using System.Threading.Tasks;
+using System.Windows;
 using ChatApplication.Net.IO;
 
 namespace ChatApplication.Net;
@@ -24,7 +25,17 @@ public class Server
     {
         if (!_client.Connected)
         {
-            _client.Connect("127.0.0.1", 7899);
+            try
+            {
+                _client.Connect("127.0.0.1", 7899);
+            }
+            catch (SocketException e)
+            {
+                MessageBox.Show("Could not connect to server", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Console.WriteLine(e);
+                return;
+            }
+
             PacketReader = new PacketReader(_client.GetStream());
 
             if (!string.IsNullOrEmpty(username))
@@ -65,9 +76,22 @@ public class Server
             // ReSharper disable once FunctionNeverReturns
         });
     }
-    
+
     public void SendMessage(string message)
     {
+        // Check if the client is connected
+        // if the client is not connected, show an error message and return
+        if (!_client.Connected)
+        {
+            MessageBox.Show(
+                "You are not connected to the server",
+                "Error",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error
+            );
+            return;
+        }
+
         var messagePacket = new PacketBuilder();
         messagePacket.WriteOpCode(5);
         messagePacket.WriteMessage(message);

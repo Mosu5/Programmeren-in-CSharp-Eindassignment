@@ -20,7 +20,7 @@ class Program
         {
             var client = new Client(_listener.AcceptTcpClient());
             _users.Add(client);
-                
+
             /* Broadcast the connection to every user on the server */
             BroadcastConnection();
         }
@@ -37,9 +37,11 @@ class Program
                 broadcastPacket.WriteMessage(usr.Username);
                 broadcastPacket.WriteMessage(usr.UID.ToString());
                 user.ClientSocket.Client.Send(broadcastPacket.GetPacketBytes());
+                
             }
         }
     }
+
     public static void BroadcastMessage(string message)
     {
         foreach (var user in _users)
@@ -50,12 +52,12 @@ class Program
             user.ClientSocket.Client.Send(messagePacket.GetPacketBytes());
         }
     }
-    
+
     public static void BroadcastDisconnect(string uid)
     {
         var disconnectUser = _users.FirstOrDefault(x => x.UID.ToString() == uid);
         if (disconnectUser != null) _users.Remove(disconnectUser);
-        
+
         foreach (var user in _users)
         {
             var broadcastPacket = new PacketBuilder();
@@ -63,7 +65,8 @@ class Program
             broadcastPacket.WriteMessage(uid);
             user.ClientSocket.Client.Send(broadcastPacket.GetPacketBytes());
         }
+
+        BroadcastMessage($"User {disconnectUser!.Username} has disconnected");
         
-        BroadcastMessage($"{disconnectUser!.Username} has disconnected");
     }
 }
