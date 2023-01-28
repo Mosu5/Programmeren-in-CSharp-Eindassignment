@@ -10,6 +10,7 @@ class FileHandler
     public async Task WriteToFileAsync(ObservableCollection<string> content)
     {
         SaveFileDialog saveFileDialog = new SaveFileDialog();
+        saveFileDialog.Filter = "IO files (*.chp)|*.chp";
         if (saveFileDialog.ShowDialog() == true)
         {
             using (StreamWriter writer = new StreamWriter(saveFileDialog.FileName, false))
@@ -26,6 +27,7 @@ class FileHandler
     {
         var lines = new ObservableCollection<string>();
         OpenFileDialog openFileDialog = new OpenFileDialog();
+        openFileDialog.Filter = "IO files (*.chp)|*.chp";
         if (openFileDialog.ShowDialog() == true)
         {
             using (StreamReader reader = new StreamReader(openFileDialog.FileName))
