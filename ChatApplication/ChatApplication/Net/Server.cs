@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 using System.Windows;
@@ -31,9 +31,8 @@ public class Server
             }
             catch (SocketException e)
             {
-                MessageBox.Show("Could not connect to server", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 Console.WriteLine(e);
-                return;
+                throw;
             }
 
             PacketReader = new PacketReader(_client.GetStream());
@@ -83,12 +82,7 @@ public class Server
         // if the client is not connected, show an error message and return
         if (!_client.Connected)
         {
-            MessageBox.Show(
-                "You are not connected to the server",
-                "Error",
-                MessageBoxButton.OK,
-                MessageBoxImage.Error
-            );
+            throw new Exception("You are not connected to the server");
             return;
         }
 

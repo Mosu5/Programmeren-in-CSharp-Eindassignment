@@ -48,7 +48,17 @@ public class MainViewModel : ObservableObject
 
         ConnectToServerCommand =
             new RelayCommand(
-                o => _server.ConnectToServer(Username),
+                o =>
+                {
+                    try
+                    {
+                        _server.ConnectToServer(Username);
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show("Could not connect to server", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                },
                 o => !string.IsNullOrEmpty(Username)
             );
 
@@ -56,7 +66,19 @@ public class MainViewModel : ObservableObject
             new RelayCommand(
                 o =>
                 {
-                    _server.SendMessage(Message);
+                    try
+                    {
+                        _server.SendMessage(Message);
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show(
+                            "You are not connected to the server",
+                            "Error",
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Error
+                        );
+                    }
                     Message = String.Empty;
                 },
                 o => !string.IsNullOrEmpty(Message)
@@ -75,14 +97,10 @@ public class MainViewModel : ObservableObject
             // displays a messagebox to warn the user, if they cancel do nothing, if they confirm load the chatlog
             async o =>
             {
-                var result = MessageBox.Show(
-                    "This will overwrite your current chatlog, are you sure you want to continue?",
-                    "Warning",
-                    MessageBoxButton.YesNo,
-                    MessageBoxImage.Warning
-                );
+                var result = WarnUserChatlogOverwrite();
                 if (result == MessageBoxResult.Yes)
                 {
+                    Disconnect();
                     var fileHandler = new FileHandler();
                     var chatlog = await fileHandler.ReadFromFileAsync();
                     if (chatlog.Count == 0)
@@ -97,6 +115,29 @@ public class MainViewModel : ObservableObject
                 }
             },
             o => true
+        );
+    }
+
+    private MessageBoxResult WarnUserChatlogOverwrite()
+    {
+        return MessageBox.Show(
+            "This will overwrite your current chatlog and disconnect u from the server, are you sure you want to continue?",
+            "Warning",
+            MessageBoxButton.YesNo,
+            MessageBoxImage.Warning
+        );
+    }
+    
+    private void Disconnect()
+    {
+        _server.Disconnect();
+        Users.Clear();
+        Username = String.Empty;
+        MessageBox.Show(
+            "You have been disconnected from the server",
+            "Disconnected",
+            MessageBoxButton.OK,
+            MessageBoxImage.Information
         );
     }
 
