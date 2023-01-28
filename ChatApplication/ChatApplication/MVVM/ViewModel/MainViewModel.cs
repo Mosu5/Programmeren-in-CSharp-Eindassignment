@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using ChatApplication.Core;
+using ChatApplication.FileIO;
 using ChatApplication.MVVM.Model;
 using ChatApplication.Net;
 
@@ -13,6 +14,8 @@ public class MainViewModel : ObservableObject
     /* Commands */
     public RelayCommand ConnectToServerCommand { get; set; }
     public RelayCommand SendMessageCommand { get; set; }
+    public RelayCommand SaveChatlogCommand { get; set; }
+    public RelayCommand LoadChatlogCommand { get; set; }
 
     /* Properties */
     public ObservableCollection<UserModel> Users { get; set; }
@@ -57,6 +60,29 @@ public class MainViewModel : ObservableObject
 
                 },
                 o => !string.IsNullOrEmpty(Message)
+            );
+        
+        SaveChatlogCommand =
+            new RelayCommand(
+                o =>
+                {
+                    var fileHandler = new FileHandler();
+                    fileHandler.WriteToFileAsync(Messages);
+                },
+                o => Messages.Count > 0
+            );
+        LoadChatlogCommand =
+            new RelayCommand(
+                o =>
+                {
+                    var fileHandler = new FileHandler();
+                    var chatlog = fileHandler.ReadFromFileAsync();
+                    foreach (var line in chatlog.Result)
+                    {
+                        Application.Current.Dispatcher.Invoke(() => Messages.Add(line));
+                    }
+                },
+                o => true
             );
     }
 
