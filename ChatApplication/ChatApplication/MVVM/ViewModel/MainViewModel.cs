@@ -56,7 +56,7 @@ public class MainViewModel : ObservableObject
                     }
                     catch (Exception e)
                     {
-                        MessageBox.Show("Could not connect to server", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("Could not connect to server. Try restarting the application.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 },
                 o => !string.IsNullOrEmpty(Username)
