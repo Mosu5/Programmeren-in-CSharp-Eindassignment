@@ -23,6 +23,7 @@ public class MainViewModel : ObservableObject
     public string Username { get; set; }
 
     private string _message;
+
     public string Message
     {
         get => _message;
@@ -57,11 +58,10 @@ public class MainViewModel : ObservableObject
                 {
                     _server.SendMessage(Message);
                     Message = String.Empty;
-
                 },
                 o => !string.IsNullOrEmpty(Message)
             );
-        
+
         SaveChatlogCommand =
             new RelayCommand(
                 o =>
@@ -71,19 +71,33 @@ public class MainViewModel : ObservableObject
                 },
                 o => Messages.Count > 0
             );
-        LoadChatlogCommand =
-            new RelayCommand(
-                o =>
+        LoadChatlogCommand = new RelayCommand(
+            // displays a messagebox to warn the user, if they cancel do nothing, if they confirm load the chatlog
+            async o =>
+            {
+                var result = MessageBox.Show(
+                    "This will overwrite your current chatlog, are you sure you want to continue?",
+                    "Warning",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Warning
+                );
+                if (result == MessageBoxResult.Yes)
                 {
                     var fileHandler = new FileHandler();
-                    var chatlog = fileHandler.ReadFromFileAsync();
-                    foreach (var line in chatlog.Result)
+                    var chatlog = await fileHandler.ReadFromFileAsync();
+                    if (chatlog.Count == 0)
+                    {
+                        return;
+                    }
+                    Messages.Clear();
+                    foreach (var line in chatlog)
                     {
                         Application.Current.Dispatcher.Invoke(() => Messages.Add(line));
                     }
-                },
-                o => true
-            );
+                }
+            },
+            o => true
+        );
     }
 
     private void RemoveUser()
